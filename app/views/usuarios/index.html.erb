@@ -1,0 +1,41 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Usuarios</h1>
+
+<table class="striped">
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Apellido</th>
+      <th>Celular</th>
+      <th>Rol</th>
+      <th>Dependencium</th>
+      <th>Email</th>
+      <th>Tipodocumento</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @usuarios.each do |usuario| %>
+      <tr>
+        <td><%= usuario.nombre %></td>
+        <td><%= usuario.apellido %></td>
+        <td><%= usuario.celular %></td>
+        <td><%= usuario.rol.descripcion %></td>
+        <td><%= usuario.dependencium.descripcion %></td>
+        <td><%= usuario.email %></td>
+        <td><%= usuario.tipodocumento.descripcion %></td>
+        <td><%= link_to '<i class="tiny material-icons">visibility</i>'.html_safe, usuario %></td>
+        <td><%= link_to '<i class="tiny material-icons">mode_edit</i>'.html_safe, edit_usuario_path(usuario) %></td>
+        <td><%= link_to '<i class="tiny material-icons">delete</i>'.html_safe, usuario, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<div class="fixed-action-btn">
+    <%= link_to '<i class="large material-icons">add_circle</i>'.html_safe, new_usuario_path, class:"btn-floating btn-large red" %>
+</div>

@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Fecha:</strong>
+  <%= @pqr.fecha %>
+</p>
+
+<p>
+  <strong>Descripcion:</strong>
+  <%= @pqr.descripcion %>
+</p>
+
+<p>
+  <strong>Archivo:</strong>
+  <%= @pqr.archivo %>
+</p>
+
+<p>
+  <strong>Estado:</strong>
+  <%= @pqr.estado %>
+</p>
+
+<p>
+  <strong>Usuario:</strong>
+  <%= @pqr.usuario %>
+</p>
+
+<p>
+  <strong>Dependencium:</strong>
+  <%= @pqr.dependencium %>
+</p>
+
+<p>
+  <strong>Respuesta:</strong>
+  <%= @pqr.respuesta %>
+</p>
+
+<%= link_to 'Edit', edit_pqr_path(@pqr) %> |
+<%= link_to 'Back', pqrs_path %>

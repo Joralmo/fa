@@ -1,0 +1,22 @@
+<%= form_with(model: tipodocumento, local: true) do |form| %>
+  <% if tipodocumento.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(tipodocumento.errors.count, "error") %> prohibited this tipodocumento from being saved:</h2>
+
+      <ul>
+      <% tipodocumento.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :descripcion %>
+    <%= form.text_field :descripcion %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

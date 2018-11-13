@@ -1,0 +1,41 @@
+<%= form_with(model: pqr, local: true, multipart: true) do |form| %>
+  <% if pqr.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(pqr.errors.count, "error") %> prohibited this pqr from being saved:</h2>
+
+      <ul>
+      <% pqr.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="input-field">
+    <%= form.label :fecha %>
+    <%= form.text_field :fecha, {:class => 'datepicker'} %>
+  </div>
+
+  <div class="input-field">
+    <%= form.label :descripcion %>
+    <%= form.text_field :descripcion %>
+  </div>
+
+  <div class="input-field">
+    <%= form.file_field :archivo %>
+  </div>
+
+  <div class="field" hidden>
+    <%= form.label :usuario_id %>
+    <%= form.text_field :usuario_id, value: usuario_actual.id %>
+  </div>
+
+  <div class="input-field">
+  <%= form.label :Dependencia, {}, {:class => "arriba"} %>
+    <%= form.select :dependencium_id, Dependencium.all.collect{ |a| [ a.descripcion, a.id] }, {}, {:class => 'browser-default'} %>
+  </div>
+
+  <div class="field">
+    <%= form.submit "Crear" %>
+  </div>
+<% end %>

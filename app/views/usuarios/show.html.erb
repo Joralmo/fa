@@ -1,0 +1,48 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Nombre:</strong>
+  <%= @usuario.nombre %>
+</p>
+
+<p>
+  <strong>Apellido:</strong>
+  <%= @usuario.apellido %>
+</p>
+
+<p>
+  <strong>Celular:</strong>
+  <%= @usuario.celular %>
+</p>
+
+<p>
+  <strong>Rol:</strong>
+  <%= @usuario.rol.descripcion %>
+</p>
+
+<p>
+  <strong>Dependencium:</strong>
+  <%= @usuario.dependencium.descripcion %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @usuario.email %>
+</p>
+
+<p>
+  <strong>Tipodocumento:</strong>
+  <%= @usuario.tipodocumento.descripcion %>
+</p>
+
+<div class="fixed-action-btn">
+    <%= link_to '<i class="large material-icons">build</i>'.html_safe, "", class:"btn-floating btn-large red" %>
+  <ul>
+    <li>
+        <%= link_to '<i class="large material-icons">mode_edit</i>'.html_safe, edit_usuario_path(@usuario), class:"btn-floating btn-large red" %>
+    </li>
+    <li>
+        <%= link_to '<i class="large material-icons">arrow_back</i>'.html_safe, usuarios_path, class:"btn-floating btn-large red" %>
+    </li>
+  </ul>
+</div>

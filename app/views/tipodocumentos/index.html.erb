@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Tipodocumentos</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Descripcion</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @tipodocumentos.each do |tipodocumento| %>
+      <tr>
+        <td><%= tipodocumento.descripcion %></td>
+        <td><%= link_to '<i class="tiny material-icons">visibility</i>'.html_safe, tipodocumento %></td>
+        <td><%= link_to '<i class="tiny material-icons">mode_edit</i>'.html_safe, edit_tipodocumento_path(tipodocumento) %></td>
+        <td><%= link_to '<i class="tiny material-icons">delete</i>'.html_safe, tipodocumento, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to '<i class="large material-icons">add_circle</i>'.html_safe, new_tipodocumento_path, class:"btn-floating btn-large blue"  %>

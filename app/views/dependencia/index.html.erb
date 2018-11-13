@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Dependencia</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Descripcion</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @dependencia.each do |dependencium| %>
+      <tr>
+        <td><%= dependencium.descripcion %></td>
+        <td><%= link_to 'Show', dependencium %></td>
+        <td><%= link_to 'Edit', edit_dependencium_path(dependencium) %></td>
+        <td><%= link_to 'Destroy', dependencium, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Dependencium', new_dependencium_path %>

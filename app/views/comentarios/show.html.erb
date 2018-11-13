@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Fecha:</strong>
+  <%= @comentario.fecha %>
+</p>
+
+<p>
+  <strong>Comentario:</strong>
+  <%= @comentario.comentario %>
+</p>
+
+<p>
+  <strong>Depactual:</strong>
+  <%= @comentario.depactual %>
+</p>
+
+<p>
+  <strong>Depanterior:</strong>
+  <%= @comentario.depanterior %>
+</p>
+
+<p>
+  <strong>Pqr:</strong>
+  <%= @comentario.pqr %>
+</p>
+
+<%= link_to 'Edit', edit_comentario_path(@comentario) %> |
+<%= link_to 'Back', comentarios_path %>

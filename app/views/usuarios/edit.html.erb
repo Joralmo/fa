@@ -1,0 +1,16 @@
+<h1>Editar Usuario <%= @usuario.nombre %></h1>
+
+<%= render 'form', usuario: @usuario %>
+
+
+<div class="fixed-action-btn">
+    <%= link_to '<i class="large material-icons">build</i>'.html_safe, "", class:"btn-floating btn-large red" %>
+  <ul>
+    <li>
+        <%= link_to '<i class="large material-icons">visibility</i>'.html_safe, @usuario, class:"btn-floating btn-large red" %>
+    </li>
+    <li>
+        <%= link_to '<i class="large material-icons">arrow_back</i>'.html_safe, usuarios_path, class:"btn-floating btn-large red" %>
+    </li>
+  </ul>
+</div>

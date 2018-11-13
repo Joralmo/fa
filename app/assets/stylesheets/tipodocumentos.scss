@@ -1,0 +1,18 @@
+// Place all the styles related to the tipodocumentos controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.actions,input:hover{   
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    -webkit-transition-duration: 0.10s;
+    cursor: pointer;
+    border: 2px solid #008CBA;
+    color: black; 
+}
+
+.actions,input:hover{
+    background-color: #008CBA;
+    color: white;
+}

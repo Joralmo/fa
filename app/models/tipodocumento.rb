@@ -1,0 +1,2 @@
+class Tipodocumento < ApplicationRecord
+end
