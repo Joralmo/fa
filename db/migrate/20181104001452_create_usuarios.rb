@@ -5,7 +5,7 @@ class CreateUsuarios < ActiveRecord::Migration[5.2]
       t.string :apellido
       t.string :celular
       t.references :rol, foreign_key: true
-      t.references :dependencium, foreign_key: true
+      t.references :dependencium, foreign_key: true, :null => true
       t.string :email
       t.references :tipodocumento, foreign_key: true
       t.string :password_digest

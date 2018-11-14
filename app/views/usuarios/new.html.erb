@@ -1,5 +1,15 @@
-<h1>Nuevo usuario</h1>
-
+<nav>
+    <div class="nav-wrapper">
+      <%= link_to "Registrarse", "registro", class:"brand-logo center" %>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li>
+              <% if usuario_actual %>
+                  <h5><%= link_to "Cerrar sesión", "cerrarSesion" %></h5>
+              <% end %>
+          </li>
+      </ul>
+    </div>
+</nav>
 <%= render 'form', usuario: @usuario %>
 
 <div class="fixed-action-btn">

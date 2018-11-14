@@ -5,7 +5,13 @@ class PqrsController < ApplicationController
   # GET /pqrs.json
   def index
     if usuario_actual
-      @pqrs = Pqr.all
+      if usuario_actual.dependencium.descripcion == "usuarioNormal"
+        @pqrs = Pqr.where(usuario: usuario_actual.id)
+      elsif usuario_actual.rol.descripcion == "s_admin"
+        @pqrs = Pqr.all
+      else
+        @pqrs = Pqr.where(dependencium: usuario_actual.dependencium)
+      end
     else
       redirect_to root_url, notice: "Debes loguearte!"
     end
@@ -36,6 +42,7 @@ class PqrsController < ApplicationController
     @pqr = Pqr.new(pqr_params)
 
     @pqr.estado = false
+    @pqr.dependencium = Dependencium.find_by(descripcion: "Director")
 
     name = pqr_params["archivo"].original_filename
     path = File.join("public", "archivos", "upload", name)

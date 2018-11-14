@@ -4,10 +4,10 @@ class UsuariosController < ApplicationController
   # GET /usuarios
   # GET /usuarios.json
   def index
-    if usuario_actual
+    if usuario_actual && usuario_actual.rol.descripcion == "s_admin"
       @usuarios = Usuario.all
     else
-      redirect_to root_url, notice: "Debes loguearte!"
+      redirect_to root_url, notice: "Debes loguearte o no tienes permiso para ver esto"
     end
   end
 
@@ -32,6 +32,11 @@ class UsuariosController < ApplicationController
   def create
     @usuario = Usuario.new
     @usuario = Usuario.new(usuario_params)
+
+    if @usuario.rol == nil && @usuario.dependencium == nil
+      @usuario.rol = Rol.find_by(descripcion: "usuario") #usuario
+      @usuario.dependencium = Dependencium.find_by(descripcion: "usuarioNormal") # usuarioNormal
+    end
 
     respond_to do |format|
       if @usuario.save

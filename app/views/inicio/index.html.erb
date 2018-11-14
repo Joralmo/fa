@@ -1,19 +1,27 @@
 <nav>
     <div class="nav-wrapper">
         <a href="#" class="brand-logo center">PQR's</a>
-        <ul id="nav-mobile" class="left hide-on-med-and-down">
-            <li><a href="sass.html">Sass</a></li>
-            <li><a href="badges.html">Components</a></li>
-            <li><a href="collapsible.html">JavaScript</a></li>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li>
+                <% if usuario_actual %>
+                    <h5><%= link_to "Cerrar sesión", "cerrarSesion" %></h5>
+                <% end %>
+            </li>
         </ul>
     </div>
 </nav>
-<% if usuario_actual %>
-    Usuario logeado <%= usuario_actual.email %>
-    <%= link_to "Cerrar sesión", "cerrarSesion" %>
-<% else %>
-    <%= link_to "Registrarse", "registro" %> O
-    <%= link_to "Iniciar sesión", "iniciarSesion" %>
-<% end %>
-
-<p id=”notice”><%= notice %></p>
+<div class="container">
+    <h1>Bienvenido</h1>
+    <p id="notice"><%= notice %></p>
+    <h3>En esté portal podrá realizar la Gestión de PQR OnLine</h3>
+    <% if usuario_actual %>
+        <p><h4>Logueado como <%= usuario_actual.nombre + " " + usuario_actual.apellido %></h4></p>
+        <p><%= link_to '<i class="material-icons left">add_circle_outline</i>Presentar PQR'.html_safe, new_pqr_path, class:"waves-effect waves-light btn" %>
+        <p><a class="waves-effect waves-light btn"><i class="material-icons left">search</i>Consultar PQR</a>
+        <p><%= link_to '<i class="material-icons left">remove_red_eye</i>Ver mis PQR'.html_safe, pqrs_path, class:"waves-effect waves-light btn" %>
+    <% else %>
+        <p><h4>Para poder presentar o consultar PQR debe</h4></p>
+        <h6><%= link_to "Registrarse", "registro" %> O
+        <%= link_to "Iniciar sesión", "iniciarSesion" %></h6>
+    <% end %>
+</div>

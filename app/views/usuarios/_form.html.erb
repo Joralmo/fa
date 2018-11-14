@@ -14,56 +14,68 @@
 </div>
 <% end %>
 
-<div class="form">
-  <div class="input-field">
-    <%= form.label :nombre %>
-    <%= form.text_field :nombre %>
-  </div>
+<div class="container">
+  <div class="row">
+    <div class="col s3"></div>
+    <div class="col s6">
+      <div class="form">
+        <div class="input-field">
+          <%= form.label :nombre %>
+          <%= form.text_field :nombre %>
+        </div>
 
-  <div class="input-field">
-    <%= form.label :apellido %>
-    <%= form.text_field :apellido %>
-  </div>
+        <div class="input-field">
+          <%= form.label :apellido %>
+          <%= form.text_field :apellido %>
+        </div>
 
-  <div class="input-field">
-    <%= form.label :celular %>
-    <%= form.text_field :celular %>
-  </div>
+        <div class="input-field">
+          <%= form.label :celular %>
+          <%= form.text_field :celular %>
+        </div>
 
-  <div class="input-field">
-  <%= form.label :Rol, {}, {:class => "arriba"} %>
-    <%= form.select :rol_id, Rol.all.collect{ |a| [ a.descripcion, a.id] }, {}, {:class => 'browser-default'} %>
-  </div>
+        <% if usuario_actual && usuario_actual.rol.descripcion == "s_admin" %>
 
-  <div class="input-field">
-  <%= form.label :Dependencia, {}, {:class => "arriba"} %>
-    <%= form.select :dependencium_id, Dependencium.all.collect{ |a| [ a.descripcion, a.id] }, {}, {:class => 'browser-default'} %>
-  </div>
+        <div class="input-field">
+        <%= form.label :Rol, {}, {:class => "arriba"} %>
+          <%= form.select :rol_id, Rol.all.collect{ |a| [ a.descripcion, a.id] }, {}, {:class => 'browser-default'} %>
+        </div>
 
-  <div class="input-field">
-    <%= form.label :email %>
-    <%= form.text_field :email %>
-  </div>
+        <div class="input-field">
+        <%= form.label :Dependencia, {}, {:class => "arriba"} %>
+          <%= form.select :dependencium_id, Dependencium.all.collect{ |a| [ a.descripcion, a.id] }, {}, {:class => 'browser-default'} %>
+        </div>
 
-  <div class="input-field">
-    <%= form.label :Tipo_De_Documento, {}, {:class => "arriba"} %>
-    <%=  form.select :tipodocumento_id, Tipodocumento.all.collect{ |d| [d.descripcion, d.id] }, {}, {:class => 'browser-default'} %>
-   
-  </div>
+        <% end %> 
 
-  <div class="input-field">
-    <%= form.label :Contraseña %>
-    <%= form.password_field :password %>
-  </div>
+        <div class="input-field">
+          <%= form.label :email %>
+          <%= form.text_field :email %>
+        </div>
 
-  <div class="input-field">
-    <%= form.label :Confirmar_contraseña %>
-    <%= form.password_field :password_confirmation %>
-  </div>
+        <div class="input-field">
+          <%= form.label :Tipo_De_Documento, {}, {:class => "arriba"} %>
+          <%=  form.select :tipodocumento_id, Tipodocumento.all.collect{ |d| [d.descripcion, d.id] }, {}, {:class => 'browser-default'} %>
+        
+        </div>
 
-  <div class="btn waves-effect waves-light">
-    <%= form.submit "Crear" %>
+        <div class="input-field">
+          <%= form.label :Contraseña %>
+          <%= form.password_field :password %>
+        </div>
+
+        <div class="input-field">
+          <%= form.label :Confirmar_contraseña %>
+          <%= form.password_field :password_confirmation %>
+        </div>
+
+        <div class="btn waves-effect waves-light">
+          <%= form.submit "Guardar" %>
+        </div>
+      </div>
+
+      <% end %>
+    </div>
+    <div class="col s3"></div>
   </div>
 </div>
-
-<% end %>

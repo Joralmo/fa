@@ -10,32 +10,41 @@
       </ul>
     </div>
   <% end %>
+<div class="container">
+  <div class="row">
+    <div class="col s2"></div>
+    <div class="col s6">
+      <div class="input-field">
+        <%= form.label :fecha %>
+        <%= form.text_field :fecha, {:class => 'datepicker'} %>
+      </div>
 
-  <div class="input-field">
-    <%= form.label :fecha %>
-    <%= form.text_field :fecha, {:class => 'datepicker'} %>
-  </div>
+      <div class="input-field">
+        <%= form.label :descripcion %>
+        <%= form.text_field :descripcion %>
+      </div>
 
-  <div class="input-field">
-    <%= form.label :descripcion %>
-    <%= form.text_field :descripcion %>
-  </div>
+      <div class="input-field">
+        <%= form.file_field :archivo %>
+      </div>
 
-  <div class="input-field">
-    <%= form.file_field :archivo %>
-  </div>
+      <div class="field" hidden>
+        <%= form.label :usuario_id %>
+        <%= form.text_field :usuario_id, value: usuario_actual.id %>
+      </div>
 
-  <div class="field" hidden>
-    <%= form.label :usuario_id %>
-    <%= form.text_field :usuario_id, value: usuario_actual.id %>
-  </div>
+      <% if false %>
+      <div class="input-field">
+      <%= form.label :Dependencia, {}, {:class => "arriba"} %>
+        <%= form.select :dependencium_id, Dependencium.all.collect{ |a| [ a.descripcion, a.id] }, {}, {:class => 'browser-default'} %>
+      </div>
+      <% end %>
 
-  <div class="input-field">
-  <%= form.label :Dependencia, {}, {:class => "arriba"} %>
-    <%= form.select :dependencium_id, Dependencium.all.collect{ |a| [ a.descripcion, a.id] }, {}, {:class => 'browser-default'} %>
+      <div class="btn waves-effect waves-light">
+        <%= form.submit "Guardar" %>
+      </div>
+    <% end %>
+    </div>
+    <div class="col s3"></div>
   </div>
-
-  <div class="field">
-    <%= form.submit "Crear" %>
-  </div>
-<% end %>
+</div>

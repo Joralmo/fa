@@ -1,15 +1,39 @@
-<p id="alert"><%= alert %></p>
-<h1>Iniciar sesión</h1>
-<%= form_tag sessions_path do |form| %>
-  <div class="field">
-    <%= label_tag :Correo %>
-    <%= text_field_tag :email %>
+<nav>
+    <div class="nav-wrapper">
+      <%= link_to "PQR's", "/", class:"brand-logo center" %>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li>
+              <% if usuario_actual %>
+                  <h5><%= link_to "Cerrar sesión", "cerrarSesion" %></h5>
+              <% end %>
+          </li>
+      </ul>
+    </div>
+</nav>
+<div class="container">
+  <div class="row">
+    <div class="col s3"></div>
+    <div class="col s6">
+      <h1>Iniciar sesión</h1>
+      <p id="alert"><%= alert %></p>
+      <%= form_tag sessions_path do |form| %>
+        <div class="field">
+          <%= label_tag :Correo %>
+          <%= text_field_tag :email %>
+        </div>
+        <div class="field">
+          <%= label_tag :Contraseña %>
+          <%= password_field_tag :password %>
+        </div>
+        <% if usuario_actual %>
+            <h5>Ya existe una sesión</h5>
+        <% else %>
+          <%= button_tag(type: "submit", class: "waves-effect waves-light btn") do %>
+              <i class='material-icons left'>check</i>Iniciar Sesión
+          <% end %>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="col s3"></div>
   </div>
-  <div class="field">
-    <%= label_tag :Contraseña %>
-    <%= password_field_tag :password %>
-  </div>
-  <div class="actions">
-    <%= submit_tag "Iniciar Sesión" %>
-  </div>
-<% end %>
+</div>

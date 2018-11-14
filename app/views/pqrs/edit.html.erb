@@ -1,6 +1,26 @@
-<h1>Editing Pqr</h1>
+<nav>
+    <div class="nav-wrapper">
+      <%= link_to "Editar Pqr", edit_usuario_path(@pqr), class:"brand-logo center" %>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li>
+              <% if usuario_actual %>
+                  <h5><%= link_to "Cerrar sesión", "/cerrarSesion" %></h5>
+              <% end %>
+          </li>
+      </ul>
+    </div>
+</nav>
 
 <%= render 'form', pqr: @pqr %>
 
-<%= link_to 'Show', @pqr %> |
-<%= link_to 'Back', pqrs_path %>
+<div class="fixed-action-btn">
+    <%= link_to '<i class="large material-icons">build</i>'.html_safe, "", class:"btn-floating btn-large red" %>
+  <ul>
+    <li>
+        <%= link_to '<i class="large material-icons">visibility</i>'.html_safe, @pqr, class:"btn-floating btn-large red" %>
+    </li>
+    <li>
+        <%= link_to '<i class="large material-icons">arrow_back</i>'.html_safe, pqrs_path, class:"btn-floating btn-large red" %>
+    </li>
+  </ul>
+</div>

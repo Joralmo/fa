@@ -7,7 +7,7 @@ class CreatePqrs < ActiveRecord::Migration[5.2]
       t.boolean :estado
       t.references :usuario, foreign_key: true
       t.references :dependencium, foreign_key: true
-      t.string :respuesta
+      t.string :respuesta, :null => true
 
       t.timestamps
     end
