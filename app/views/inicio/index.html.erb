@@ -8,7 +8,15 @@
                 <% end %>
             </li>
         </ul>
+        <ul id="nav-mobile" class="left hide-on-med-and-down">
+            <li>
+                <% if usuario_actual %>
+                    <a href="#" data-target="slide-out" class="sidenav-trigger" id="btnMenu"><i class='material-icons'>menu</i></a>
+                <% end %>
+            </li>
+        </ul>
     </div>
+
 </nav>
 <div class="container">
     <h1>Bienvenido</h1>
@@ -16,7 +24,9 @@
     <h3>En esté portal podrá realizar la Gestión de PQR OnLine</h3>
     <% if usuario_actual %>
         <p><h4>Logueado como <%= usuario_actual.nombre + " " + usuario_actual.apellido %></h4></p>
+        <% if usuario_actual.dependencium.descripcion == "usuarioNormal" %>
         <p><%= link_to '<i class="material-icons left">add_circle_outline</i>Presentar PQR'.html_safe, new_pqr_path, class:"waves-effect waves-light btn" %>
+        <% end %>
         <p><a class="waves-effect waves-light btn"><i class="material-icons left">search</i>Consultar PQR</a>
         <p><%= link_to '<i class="material-icons left">remove_red_eye</i>Ver mis PQR'.html_safe, pqrs_path, class:"waves-effect waves-light btn" %>
     <% else %>

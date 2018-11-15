@@ -14,6 +14,8 @@ class ComentariosController < ApplicationController
 
   # GET /comentarios/new
   def new
+    Rails.logger.debug params[:idNuevaDependencia]
+    Rails.logger.debug params[:idPqr]
     @comentario = Comentario.new
   end
 
@@ -25,15 +27,18 @@ class ComentariosController < ApplicationController
   # POST /comentarios.json
   def create
     @comentario = Comentario.new(comentario_params)
-
-    respond_to do |format|
-      if @comentario.save
-        format.html { redirect_to @comentario, notice: 'Comentario was successfully created.' }
-        format.json { render :show, status: :created, location: @comentario }
-      else
-        format.html { render :new }
-        format.json { render json: @comentario.errors, status: :unprocessable_entity }
+    if false
+      respond_to do |format|
+        if @comentario.save
+          format.html { redirect_to @comentario, notice: 'Comentario was successfully created.' }
+          format.json { render :show, status: :created, location: @comentario }
+        else
+          format.html { render :new }
+          format.json { render json: @comentario.errors, status: :unprocessable_entity }
+        end
       end
+    else
+      Rails.logger.debug params
     end
   end
 

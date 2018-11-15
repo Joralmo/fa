@@ -66,13 +66,24 @@ class PqrsController < ApplicationController
   # PATCH/PUT /pqrs/1
   # PATCH/PUT /pqrs/1.json
   def update
-    respond_to do |format|
-      if @pqr.update(pqr_params)
-        format.html { redirect_to @pqr, notice: 'Pqr was successfully updated.' }
-        format.json { render :show, status: :ok, location: @pqr }
-      else
-        format.html { render :edit }
-        format.json { render json: @pqr.errors, status: :unprocessable_entity }
+    if params.require(:commit) == "Transferir"
+      datos = {
+        idPqr: params[:id],
+        idNuevaDependencia: pqr_params[:dependencium_id]
+      }
+      redirect_to new_comentario_path(datos)
+      #Rails.logger.debug datos[:idPqr]
+      #Rails.logger.debug "Está en " + Pqr.find(params[:id]).dependencium.descripcion
+      #Rails.logger.debug "Va para " + Dependencium.find(pqr_params[:dependencium_id]).descripcion
+    else
+      respond_to do |format|
+        if @pqr.update(pqr_params)
+          format.html { redirect_to @pqr, notice: 'Pqr was successfully updated.' }
+          format.json { render :show, status: :ok, location: @pqr }
+        else
+          format.html { render :edit }
+          format.json { render json: @pqr.errors, status: :unprocessable_entity }
+        end
       end
     end
   end

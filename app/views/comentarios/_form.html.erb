@@ -12,15 +12,17 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :fecha %>
-    <%= form.datetime_select :fecha %>
-  </div>
-
-  <div class="field">
     <%= form.label :comentario %>
     <%= form.text_field :comentario %>
   </div>
 
+  <% if false %>
+
+  <div class="field">
+    <%= form.label :fecha %>
+    <%= form.text_field :fecha, {:class => 'datepicker'} %>
+  </div>
+  
   <div class="field">
     <%= form.label :depactual %>
     <%= form.text_field :depactual %>
@@ -35,6 +37,8 @@
     <%= form.label :pqr_id %>
     <%= form.text_field :pqr_id %>
   </div>
+
+  <% end %>
 
   <div class="actions">
     <%= form.submit %>

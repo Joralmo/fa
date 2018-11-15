@@ -13,6 +13,28 @@
   </head>
 
   <body>
+    <% if usuario_actual %>
+      <ul id="slide-out" class="sidenav">
+          <li><div class="user-view">
+            <div class="background">
+                <img src="https://placeimg.com/640/480/any">
+            </div>
+            <%= link_to '<img class="circle" src="https://placeimg.com/120/120/any">'.html_safe, usuario_actual, class:"circle" %>
+            <p><span class="white-text name"><%= usuario_actual.nombre + " " + usuario_actual.apellido %></span>
+            <p><span class="white-text email"><%= usuario_actual.email %></span>
+            </div>
+          </li>
+          <li><a href="#!"><i class="material-icons">cloud</i>Primer link con icono prueba</a></li>
+          <li><a href="#!">Second Link</a></li>
+          <li><div class="divider"></div></li>
+          <li><a class="subheader">Administrar</a></li>
+          <li><%= link_to '<i class="material-icons">person</i>Usuarios'.html_safe, usuarios_path, class:"waves-effect" %></li>
+          <li><%= link_to '<i class="material-icons">recent_actors</i>Dependencias'.html_safe, dependencia_path, class:"waves-effect" %></li>
+          <li><%= link_to '<i class="material-icons">people</i>Roles'.html_safe, rols_path, class:"waves-effect" %></li>
+          <li><%= link_to '<i class="material-icons">payment</i>Tipos de documentos'.html_safe, tipodocumentos_path, class:"waves-effect" %></li>
+          <li><%= link_to "<i class='material-icons'>input</i>PQR's".html_safe, pqrs_path, class:"waves-effect" %></li>
+      </ul>
+    <% end %>
     <%= yield %>
   </body>
 </html>

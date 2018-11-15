@@ -17,3 +17,7 @@
 nav{
     background-color: #f53d3d;   
 }
+
+#btnMenu{
+    display: block;
+}
