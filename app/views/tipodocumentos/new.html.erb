@@ -1,6 +1,18 @@
-<h1>Nuevo Documento</h1>
-
+<nav>
+    <div class="nav-wrapper">
+      <%= link_to "Nuevo tipo de documento", new_tipodocumento_path, class:"brand-logo center" %>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li>
+              <% if usuario_actual %>
+                  <h5><%= link_to "Cerrar sesión", "cerrarSesion" %></h5>
+              <% end %>
+          </li>
+      </ul>
+    </div>
+</nav>
 <%= render 'form', tipodocumento: @tipodocumento, class: 'btn' %>
 
-<%= link_to '<i class="large material-icons">arrow_back</i>'.html_safe, tipodocumentos_path, class:"btn-floating btn-large blue" %>
+<div class="fixed-action-btn">
+    <%= link_to '<i class="large material-icons">arrow_back</i>'.html_safe, tipodocumentos_path, class:"btn-floating btn-large red" %>
+</div>
 
