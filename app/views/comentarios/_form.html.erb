@@ -1,46 +1,65 @@
 <%= form_with(model: comentario, local: true) do |form| %>
-  <% if comentario.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(comentario.errors.count, "error") %> prohibited this comentario from being saved:</h2>
+<% if comentario.errors.any? %>
+<div id="error_explanation">
+  <h2>
+    <%= pluralize(comentario.errors.count, "error") %> prohibited this comentario from being saved:</h2>
 
-      <ul>
-      <% comentario.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <ul>
+    <% comentario.errors.full_messages.each do |message| %>
+    <li>
+      <%= message %>
+    </li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
 
-  <div class="field">
-    <%= form.label :comentario %>
-    <%= form.text_field :comentario %>
-  </div>
+<div class="field">
+  <%= form.label :comentario %>
+  <%= form.text_field :comentario, value:"Soy un comentario" %>
+</div>
 
-  <% if false %>
+<% if false %>
 
-  <div class="field">
-    <%= form.label :fecha %>
-    <%= form.text_field :fecha, {:class => 'datepicker'} %>
-  </div>
-  
-  <div class="field">
-    <%= form.label :depactual %>
-    <%= form.text_field :depactual %>
-  </div>
+<div class="field">
+  <%= form.label :fecha %>
+  <%= form.text_field :fecha, {:class => 'datepicker'} %>
+</div>
 
-  <div class="field">
-    <%= form.label :depanterior %>
-    <%= form.text_field :depanterior %>
-  </div>
+<div class="field">
+  <%= form.label :depactual %>
+  <%= form.text_field :depactual %>
+</div>
 
-  <div class="field">
-    <%= form.label :pqr_id %>
-    <%= form.text_field :pqr_id %>
-  </div>
+<div class="field">
+  <%= form.label :depanterior %>
+  <%= form.text_field :depanterior %>
+</div>
 
-  <% end %>
+<div class="field">
+  <%= form.label :pqr_id %>
+  <%= form.text_field :pqr_id %>
+</div>
 
-  <div class="actions">
-    <%= form.submit %>
-  </div>
+<% end %>
+
+<div class="actions">
+  <%= form.submit %>
+</div>
+
+<div class="field" hidden>
+  <%= form.label :depactual %>
+  <%= form.text_field :depactual, value: params[:idNuevaDependencia] %>
+</div>
+
+<div class="field" hidden>
+  <%= form.label :pqr_id %>
+  <%= form.text_field :pqr_id, value: params[:idPqr] %>
+</div>
+
+<div class="field" hidden>
+  <%= form.label :depanterior %>
+  <%= form.text_field :depanterior, value: Pqr.find(params[:idPqr]).dependencium.id %>
+</div>
+
 <% end %>

@@ -14,8 +14,7 @@ class ComentariosController < ApplicationController
 
   # GET /comentarios/new
   def new
-    Rails.logger.debug params[:idNuevaDependencia]
-    Rails.logger.debug params[:idPqr]
+    Rails.logger.debug @datos
     @comentario = Comentario.new
   end
 
@@ -27,6 +26,21 @@ class ComentariosController < ApplicationController
   # POST /comentarios.json
   def create
     @comentario = Comentario.new(comentario_params)
+    @comentario.fecha = Time.now
+
+    #Falta guardar el comentario
+
+    Rails.logger.debug "------------------------"
+    Rails.logger.debug @comentario[:fecha]
+    Rails.logger.debug "------------------------"
+
+    # @pqr = Pqr.find(comentario_params[:pqr_id])
+    # if @pqr.update(dependencium: Dependencium.find(comentario_params[:depactual]))
+    #   Rails.logger.debug "------------------------"
+    #   Rails.logger.debug "Actualizado"
+    #   Rails.logger.debug "------------------------"
+    # end
+    
     if false
       respond_to do |format|
         if @comentario.save
@@ -38,7 +52,7 @@ class ComentariosController < ApplicationController
         end
       end
     else
-      Rails.logger.debug params
+      # Rails.logger.debug params
     end
   end
 
