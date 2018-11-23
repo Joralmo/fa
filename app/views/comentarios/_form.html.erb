@@ -14,6 +14,21 @@
 </div>
 <% end %>
 
+<% if usuario_actual.rol.descripcion == "s_admin"%>
+  <div class="input-field">
+    <%= form.label :Transferir_a, {}, {:class => "arriba"} %>
+    <%= form.select :dependencium_id, Usuario.where(dependencium:Dependencium.where(id:params[:idNuevaDependencia])).where.not(rol:Rol.where(descripcion:"esclavoDependencia")).collect{ |a| [ a.nombre, a.id] }, {}, {:class => 'browser-default'} %>
+  </div>
+<% end %>
+
+<%if usuario_actual.rol.descripcion == "jefeDependencia"%>
+  <div class="input-field">
+    <%= form.label :Transferir_a, {}, {:class => "arriba"} %>
+    <%= form.select :dependencium_id, Usuario.where(dependencium:Dependencium.where(id:params[:idNuevaDependencia])).where.not(rol:Rol.where(descripcion:"jefeDependencia")).collect{ |a| [ a.nombre, a.id] }, {}, {:class => 'browser-default'} %>
+  </div>
+<% end %>
+
+
 <div class="field">
   <%= form.label :comentario %>
   <%= form.text_field :comentario, value:"Soy un comentario" %>

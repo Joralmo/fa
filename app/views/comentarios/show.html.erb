@@ -2,28 +2,12 @@
 
 <p>
   <strong>Fecha:</strong>
-  <%= @comentario.fecha %>
+  <%= @comentario.fecha.strftime("%d de %B del %Y") %>
 </p>
 
 <p>
-  <strong>Comentario:</strong>
-  <%= @comentario.comentario %>
+  Ha transferido el Pqr a <b><%= Dependencium.find(@comentario.depactual).descripcion %></b>
+  con el comentario <b><%= @comentario.comentario %></b>
 </p>
 
-<p>
-  <strong>Depactual:</strong>
-  <%= @comentario.depactual %>
-</p>
-
-<p>
-  <strong>Depanterior:</strong>
-  <%= @comentario.depanterior %>
-</p>
-
-<p>
-  <strong>Pqr:</strong>
-  <%= @comentario.pqr %>
-</p>
-
-<%= link_to 'Edit', edit_comentario_path(@comentario) %> |
-<%= link_to 'Back', comentarios_path %>
+<%= link_to 'Volver a los pqr', pqrs_path %>

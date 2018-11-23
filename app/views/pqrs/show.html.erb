@@ -41,8 +41,8 @@
 <% if usuario_actual.dependencium == @pqr.dependencium %>
   <%= form_with(model: @pqr, local: true, multipart: true) do |form| %>
     <div class="input-field">
-      <%= form.label :Transferir_a, {}, {:class => "arriba"} %>
-      <%= form.select :dependencium_id, Dependencium.where.not(descripcion:usuario_actual.dependencium.descripcion).where.not(descripcion:"usuarioNormal").collect{ |a| [ a.descripcion, a.id] }, {}, {:class => 'browser-default'} %>
+      <%= form.label :Transferir_a_dependencia, {}, {:class => "arriba"} %>
+      <%= form.select :dependencium_id, Dependencium.where.not(descripcion:usuario_actual.dependencium.descripcion).where.not(descripcion:"usuarioNormal").collect{ |a| [ a.descripcion, a.id] }, {}, {:class => 'browser-default', :id => "dependencia"} %>
     </div>
     <div class="btn waves-effect waves-light">
       <%= form.submit "Transferir" %>

@@ -21,7 +21,7 @@
         <td><%= comentario.comentario %></td>
         <td><%= comentario.depactual %></td>
         <td><%= comentario.depanterior %></td>
-        <td><%= comentario.pqr %></td>
+        <td><%= comentario.pqr.descripcion %></td>
         <td><%= link_to 'Show', comentario %></td>
         <td><%= link_to 'Edit', edit_comentario_path(comentario) %></td>
         <td><%= link_to 'Destroy', comentario, method: :delete, data: { confirm: 'Are you sure?' } %></td>

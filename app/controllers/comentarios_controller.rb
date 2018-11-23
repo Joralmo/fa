@@ -14,7 +14,9 @@ class ComentariosController < ApplicationController
 
   # GET /comentarios/new
   def new
-    Rails.logger.debug @datos
+    Rails.logger.debug "------------------------"
+    Rails.logger.debug params
+    Rails.logger.debug "------------------------"
     @comentario = Comentario.new
   end
 
@@ -34,25 +36,21 @@ class ComentariosController < ApplicationController
     Rails.logger.debug @comentario[:fecha]
     Rails.logger.debug "------------------------"
 
-    # @pqr = Pqr.find(comentario_params[:pqr_id])
-    # if @pqr.update(dependencium: Dependencium.find(comentario_params[:depactual]))
-    #   Rails.logger.debug "------------------------"
-    #   Rails.logger.debug "Actualizado"
-    #   Rails.logger.debug "------------------------"
-    # end
+    @pqr = Pqr.find(comentario_params[:pqr_id])
+    if @pqr.update(dependencium: Dependencium.find(comentario_params[:depactual]))
+      Rails.logger.debug "------------------------"
+      Rails.logger.debug "Actualizado"
+      Rails.logger.debug "------------------------"
+    end
     
-    if false
-      respond_to do |format|
-        if @comentario.save
-          format.html { redirect_to @comentario, notice: 'Comentario was successfully created.' }
-          format.json { render :show, status: :created, location: @comentario }
-        else
-          format.html { render :new }
-          format.json { render json: @comentario.errors, status: :unprocessable_entity }
-        end
+    respond_to do |format|
+      if @comentario.save
+        format.html { redirect_to @comentario, notice: 'Transferido correctamente' }
+        format.json { render :show, status: :created, location: @comentario }
+      else
+        format.html { render :new }
+        format.json { render json: @comentario.errors, status: :unprocessable_entity }
       end
-    else
-      # Rails.logger.debug params
     end
   end
 
