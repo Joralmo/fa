@@ -40,6 +40,7 @@ class ComentariosController < ApplicationController
     if @pqr.update(dependencium: Dependencium.find(comentario_params[:depactual]))
       Rails.logger.debug "------------------------"
       Rails.logger.debug "Actualizado"
+      Rails.logger.debug @pqr.usuario.nombre
       Rails.logger.debug "------------------------"
     end
     

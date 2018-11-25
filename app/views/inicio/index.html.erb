@@ -14,6 +14,14 @@
                     <a href="#" data-target="slide-out" class="sidenav-trigger" id="btnMenu"><i class='material-icons'>menu</i></a>
                 <% end %>
             </li>
+            <li>
+                <% if usuario_actual %>
+                    <a class="dropdown-trigger" href="#!" data-activates="notification">
+                    <i class="material-icons white-text ">notifications</i>
+                    <small id="numeroDeNotificaciones" class="notification-badge">0</small>
+                    </a>
+                <% end %>
+            </li>
         </ul>
     </div>
 
@@ -35,3 +43,14 @@
         <%= link_to "Iniciar sesión", "iniciarSesion" %></h6>
     <% end %>
 </div>
+
+
+<%= javascript_tag do %>
+    <%if usuario_actual %>
+    let numeroDeNotificaciones = document.getElementById("numeroDeNotificaciones");
+    if(window.localStorage.getItem('<%= usuario_actual.id %>')){
+        let notificationes = JSON.parse(window.localStorage.getItem('<%= usuario_actual.id %>'));
+        numeroDeNotificaciones.innerHTML = notificationes.length;
+    }
+    <%end%>
+<% end %>

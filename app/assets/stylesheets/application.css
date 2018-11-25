@@ -21,3 +21,14 @@ nav{
 #btnMenu{
     display: block;
 }
+
+.notification-badge {
+    position: relative;
+    right: -20px;
+    top: -50px;
+    color: #941e1e;
+    background-color: #f5f1f2;
+    margin: 0 -.5em;
+    border-radius: 50%;
+    padding: 5px 8px;
+}

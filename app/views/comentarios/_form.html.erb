@@ -22,9 +22,24 @@
 <% end %>
 
 <%if usuario_actual.rol.descripcion == "jefeDependencia"%>
+  
+  <%if params[:idNuevaDependencia] == "1" %>
+    <div class="input-field">
+      <%= form.label :Transferir_a, {}, {:class => "arriba"} %>
+      <%= form.select :dependencium_id, Usuario.where(dependencium:Dependencium.where(descripcion:"Director")).collect{ |a| [ a.nombre + " " + a.dependencium.descripcion, a.id] }, {}, {:class => 'browser-default'} %>
+    </div>
+  <%else%>
+    <div class="input-field">
+      <%= form.label :Transferir_a, {}, {:class => "arriba"} %>
+      <%= form.select :dependencium_id, Usuario.where.not(rol:Rol.where(descripcion:"jefeDependencia")).where.not(dependencium:Dependencium.where(descripcion:"usuarioNormal")).where(dependencium:usuario_actual.dependencium).collect{ |a| [ a.nombre + " " + a.dependencium.descripcion, a.id] }, {}, {:class => 'browser-default'} %>
+    </div>
+  <%end%>
+<% end %>
+
+<%if usuario_actual.rol.descripcion == "esclavoDependencia"%>
   <div class="input-field">
     <%= form.label :Transferir_a, {}, {:class => "arriba"} %>
-    <%= form.select :dependencium_id, Usuario.where(dependencium:Dependencium.where(id:params[:idNuevaDependencia])).where.not(rol:Rol.where(descripcion:"jefeDependencia")).collect{ |a| [ a.nombre, a.id] }, {}, {:class => 'browser-default'} %>
+    <%= form.select :dependencium_id, Usuario.where(dependencium:Dependencium.where(id:params[:idNuevaDependencia])).where.not(rol:Rol.where(descripcion:"esclavoDependencia")).collect{ |a| [ a.nombre, a.id] }, {}, {:class => 'browser-default'} %>
   </div>
 <% end %>
 
@@ -59,7 +74,7 @@
 <% end %>
 
 <div class="actions">
-  <%= form.submit %>
+  <%= form.submit "Enviar", {id:"enviar"} %>
 </div>
 
 <div class="field" hidden>
@@ -77,4 +92,26 @@
   <%= form.text_field :depanterior, value: Pqr.find(params[:idPqr]).dependencium.id %>
 </div>
 
+<% end %>
+
+
+<%= javascript_tag do %>
+  let transferir = document.getElementById("enviar");
+  let select = document.getElementById("comentario_dependencium_id");
+  transferir.addEventListener("click", (e)=>{
+
+    e.preventDefault();
+    let notificacion = [{
+      mensaje: '<%= usuario_actual.nombre %>' + " Te ha transferido un pqr"
+    }];
+    if(window.localStorage.getItem(select.value)){
+      let notificaciones = JSON.parse(window.localStorage.getItem(select.value));
+      notificaciones.push(notificacion[0]);
+      window.localStorage.setItem(select.value, JSON.stringify(notificaciones));
+    }else{
+      window.localStorage.setItem(select.value, JSON.stringify(notificacion));
+    }
+    console.log(JSON.parse(window.localStorage.getItem(select.value)));
+
+  });
 <% end %>

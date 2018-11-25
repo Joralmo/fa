@@ -1,63 +1,116 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
+  <div class="row">
+    <div class="col s2"></div>
+    <div class="col s6">
 
-<p>
-  <strong>Fecha:</strong>
-  <%= @pqr.fecha.strftime("%d de %B del %Y") %>
-</p>
 
-<p>
-  <strong>Descripcion:</strong>
-  <%= @pqr.descripcion %>
-</p>
+      <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Archivo:</strong>
-  <a href="/<%= @pqr.archivo %>" target="_blank" >Archivo</a>
-</p>
+      <p>
+        <strong>Fecha:</strong>
+        <%= @pqr.fecha.strftime("%d de %B del %Y") %>
+      </p>
 
-<p>
-  <strong>Estado:</strong>
-  <%= @pqr.estado %>
-</p>
+      <p>
+        <strong>Descripcion:</strong>
+        <%= @pqr.descripcion %>
+      </p>
 
-<p>
-  <strong>Usuario:</strong>
-  <%= @pqr.usuario.nombre %>
-</p>
+      <p>
+        <strong>Archivo:</strong>
+        <a href="/<%= @pqr.archivo %>" target="_blank" >Archivo</a>
+      </p>
 
-<p>
-  <strong>Dependencium:</strong>
-  <%= @pqr.dependencium.descripcion %>
-</p>
-<% if @pqr.respuesta != nil %>
-<p>
-  <strong>Respuesta:</strong>
-  <%= @pqr.respuesta %>
-</p>
-<% end %>
+      <p>
+        <strong>Estado:</strong>
+        <%= @pqr.estado %>
+      </p>
 
-<br>
+      <p>
+        <strong>Usuario:</strong>
+        <%= @pqr.usuario.nombre %>
+      </p>
 
-<% if usuario_actual.dependencium == @pqr.dependencium %>
-  <%= form_with(model: @pqr, local: true, multipart: true) do |form| %>
-    <div class="input-field">
-      <%= form.label :Transferir_a_dependencia, {}, {:class => "arriba"} %>
-      <%= form.select :dependencium_id, Dependencium.where.not(descripcion:usuario_actual.dependencium.descripcion).where.not(descripcion:"usuarioNormal").collect{ |a| [ a.descripcion, a.id] }, {}, {:class => 'browser-default', :id => "dependencia"} %>
+      <p>
+        <strong>Dependencium:</strong>
+        <%= @pqr.dependencium.descripcion %>
+      </p>
+      <% if @pqr.respuesta != nil %>
+      <p>
+        <strong>Respuesta:</strong>
+        <%= @pqr.respuesta %>
+      </p>
+      <% end %>
+
+      <br>
+
+      <% if usuario_actual.dependencium == @pqr.dependencium %>
+        <%= form_with(model: @pqr, local: true, multipart: true) do |form| %>
+          <% if usuario_actual.dependencium.descripcion == "Director" %>
+            <div class="input-field">
+              <%= form.label :Transferir_a_dependencia, {}, {:class => "arriba"} %>
+              <%= form.select :dependencium_id, Dependencium.where("descripcion != ? AND descripcion != ?", "Director", "usuarioNormal").collect{ |a| [ a.descripcion, a.id] }, {}, {:class => 'browser-default', :id => "dependencia"} %>
+            </div>
+          <%elsif usuario_actual.rol.descripcion == "esclavoDependencia" %>
+            <div class="input-field">
+              <%= form.label :Transferir_a_dependencia, {}, {:class => "arriba"} %>
+              <%= form.select :dependencium_id, Dependencium.where("descripcion = ?", usuario_actual.dependencium.descripcion).collect{ |a| [ a.descripcion, a.id] }, {}, {:class => 'browser-default', :id => "dependencia"} %>
+            </div>
+          <%else%>
+            <div class="input-field">
+              <%= form.label :Transferir_a_dependencia, {}, {:class => "arriba"} %>
+              <%= form.select :dependencium_id, Dependencium.where("descripcion = ? OR descripcion = ?", usuario_actual.dependencium.descripcion, "Director").collect{ |a| [ a.descripcion, a.id] }, {}, {:class => 'browser-default', :id => "dependencia"} %>
+            </div>
+          <%end%>
+          <div class="btn waves-effect waves-light">
+            <%= form.submit "Transferir", {id:"transferir"} %>
+          </div>
+        <% end %>
+      <% end %>
+
+      <% if usuario_actual.dependencium.descripcion == "Director" %>
+        <br><br><br><br>
+        <% if Comentario.all.length == 0 %>
+          No hay comentarios <br>
+        <% else %>
+          <table>
+            <caption>Trazabilidad del pqr</caption>
+            <thead>
+              <tr>
+                  <th>Fecha</th>
+                  <th>Comentario</th>
+                  <th>De</th>
+                  <th>Para</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <% Comentario.where(pqr:@pqr).each do |comentario| %>
+                <tr>
+                  <td><%= comentario.fecha.strftime("%d de %B del %Y a las %H:%M") %></td>
+                  <td><%= comentario.comentario %></td>
+                  <td><%= Dependencium.find(comentario.depanterior).descripcion %></td>
+                  <td><%= Dependencium.find(comentario.depactual).descripcion %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        <% end %>
+      <%end%>
+
+      <div class="fixed-action-btn">
+          <%= link_to '<i class="large material-icons">build</i>'.html_safe, "", class:"btn-floating btn-large red" %>
+        <ul>
+          <li>
+              <%= link_to '<i class="large material-icons">mode_edit</i>'.html_safe, edit_pqr_path(@pqr), class:"btn-floating btn-large red" %>
+          </li>
+          <li>
+              <%= link_to '<i class="large material-icons">arrow_back</i>'.html_safe, pqrs_path, class:"btn-floating btn-large red" %>
+          </li>
+        </ul>
+      </div>
+
     </div>
-    <div class="btn waves-effect waves-light">
-      <%= form.submit "Transferir" %>
-    </div>
-  <% end %>
-<% end %>
-
-<div class="fixed-action-btn">
-    <%= link_to '<i class="large material-icons">build</i>'.html_safe, "", class:"btn-floating btn-large red" %>
-  <ul>
-    <li>
-        <%= link_to '<i class="large material-icons">mode_edit</i>'.html_safe, edit_pqr_path(@pqr), class:"btn-floating btn-large red" %>
-    </li>
-    <li>
-        <%= link_to '<i class="large material-icons">arrow_back</i>'.html_safe, pqrs_path, class:"btn-floating btn-large red" %>
-    </li>
-  </ul>
+    <div class="col s3"></div>
+  </div>
 </div>
