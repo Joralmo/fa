@@ -16,7 +16,7 @@
             </li>
             <li>
                 <% if usuario_actual %>
-                    <a class="dropdown-trigger" href="#!" data-activates="notification">
+                    <a class="dropdown-trigger" href="/notifications" data-activates="notification">
                     <i class="material-icons white-text ">notifications</i>
                     <small id="numeroDeNotificaciones" class="notification-badge">0</small>
                     </a>
@@ -53,4 +53,11 @@
         numeroDeNotificaciones.innerHTML = notificationes.length;
     }
     <%end%>
+<% end %>
+
+
+<%= javascript_tag do %>
+    '<% if usuario_actual %>'
+        numeroDeNotificaciones.innerHTML = '<%=Notification.where(idusuario:usuario_actual.id).length%>';
+    '<%end%>'
 <% end %>

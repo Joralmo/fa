@@ -22,5 +22,6 @@ document.onreadystatechange = () => {
         var initFecha = M.Datepicker.init(fecha, {});
         var sidenav = document.querySelectorAll('.sidenav');
         var iniSidenav = M.Sidenav.init(sidenav, {});
+        window.localStorage.setItem("pagina", location.href);
     }
 };

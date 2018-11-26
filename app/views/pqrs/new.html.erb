@@ -16,3 +16,10 @@
 <div class="fixed-action-btn">
     <%= link_to '<i class="large material-icons">arrow_back</i>'.html_safe, pqrs_path, class:"btn-floating btn-large red" %>
 </div>
+
+<script>
+    if(window.localStorage.getItem("pagina") != location.href){
+        window.localStorage.setItem("pagina", location.href);
+        location.reload();
+    }
+</script>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_04_001508) do
+ActiveRecord::Schema.define(version: 2018_11_26_024406) do
 
   create_table "comentarios", force: :cascade do |t|
     t.datetime "fecha"
@@ -25,6 +25,14 @@ ActiveRecord::Schema.define(version: 2018_11_04_001508) do
 
   create_table "dependencia", force: :cascade do |t|
     t.string "descripcion"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.string "mensaje"
+    t.string "idUsuario"
+    t.boolean "leida"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
