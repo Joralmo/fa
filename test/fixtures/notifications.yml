@@ -4,8 +4,10 @@ one:
   mensaje: MyString
   idUsuario: MyString
   leida: false
+  pqr: MyString
 
 two:
   mensaje: MyString
   idUsuario: MyString
   leida: false
+  pqr: MyString

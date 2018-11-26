@@ -1,19 +1,21 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  fecha: 2018-11-03 19:15:00
+  fecha: 2018-11-25 22:18:03
   descripcion: MyString
   archivo: MyString
   estado: false
   usuario: one
   dependencium: one
   respuesta: MyString
+  actual: MyString
 
 two:
-  fecha: 2018-11-03 19:15:00
+  fecha: 2018-11-25 22:18:03
   descripcion: MyString
   archivo: MyString
   estado: false
   usuario: two
   dependencium: two
   respuesta: MyString
+  actual: MyString

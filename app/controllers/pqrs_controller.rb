@@ -43,6 +43,7 @@ class PqrsController < ApplicationController
 
     @pqr.estado = false
     @pqr.dependencium = Dependencium.find_by(descripcion: "Director")
+    @pqr.actual = "s_admin"
 
     name = pqr_params["archivo"].original_filename
     path = File.join("public", "archivos", "upload", name)

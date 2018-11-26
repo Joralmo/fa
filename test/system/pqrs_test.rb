@@ -14,6 +14,7 @@ class PqrsTest < ApplicationSystemTestCase
     visit pqrs_url
     click_on "New Pqr"
 
+    fill_in "Actual", with: @pqr.actual
     fill_in "Archivo", with: @pqr.archivo
     fill_in "Dependencium", with: @pqr.dependencium_id
     fill_in "Descripcion", with: @pqr.descripcion
@@ -31,6 +32,7 @@ class PqrsTest < ApplicationSystemTestCase
     visit pqrs_url
     click_on "Edit", match: :first
 
+    fill_in "Actual", with: @pqr.actual
     fill_in "Archivo", with: @pqr.archivo
     fill_in "Dependencium", with: @pqr.dependencium_id
     fill_in "Descripcion", with: @pqr.descripcion

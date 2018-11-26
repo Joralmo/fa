@@ -17,7 +17,7 @@ class PqrsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create pqr" do
     assert_difference('Pqr.count') do
-      post pqrs_url, params: { pqr: { archivo: @pqr.archivo, dependencium_id: @pqr.dependencium_id, descripcion: @pqr.descripcion, estado: @pqr.estado, fecha: @pqr.fecha, respuesta: @pqr.respuesta, usuario_id: @pqr.usuario_id } }
+      post pqrs_url, params: { pqr: { actual: @pqr.actual, archivo: @pqr.archivo, dependencium_id: @pqr.dependencium_id, descripcion: @pqr.descripcion, estado: @pqr.estado, fecha: @pqr.fecha, respuesta: @pqr.respuesta, usuario_id: @pqr.usuario_id } }
     end
 
     assert_redirected_to pqr_url(Pqr.last)
@@ -34,7 +34,7 @@ class PqrsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update pqr" do
-    patch pqr_url(@pqr), params: { pqr: { archivo: @pqr.archivo, dependencium_id: @pqr.dependencium_id, descripcion: @pqr.descripcion, estado: @pqr.estado, fecha: @pqr.fecha, respuesta: @pqr.respuesta, usuario_id: @pqr.usuario_id } }
+    patch pqr_url(@pqr), params: { pqr: { actual: @pqr.actual, archivo: @pqr.archivo, dependencium_id: @pqr.dependencium_id, descripcion: @pqr.descripcion, estado: @pqr.estado, fecha: @pqr.fecha, respuesta: @pqr.respuesta, usuario_id: @pqr.usuario_id } }
     assert_redirected_to pqr_url(@pqr)
   end
 

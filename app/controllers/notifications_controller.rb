@@ -4,7 +4,7 @@ class NotificationsController < ApplicationController
   # GET /notifications
   # GET /notifications.json
   def index
-    @notifications = Notification.all
+    @notifications = Notification.where(idusuario:usuario_actual.id)
   end
 
   # GET /notifications/1
@@ -38,7 +38,10 @@ class NotificationsController < ApplicationController
   end
 
   def nuevaNotificacion
-    if Notification.create(idUsuario:params[:idUsuario], mensaje:params[:mensaje], leida:false)
+    # Rails.logger.debug "==================="
+    # Rails.logger.debug params
+    # Rails.logger.debug "==================="
+    if Notification.create(idUsuario:params[:idUsuario], mensaje:params[:mensaje], leida:false, pqr:params[:pqr])
       render :json => true
     end
   end

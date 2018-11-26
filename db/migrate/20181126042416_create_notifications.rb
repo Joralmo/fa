@@ -4,6 +4,7 @@ class CreateNotifications < ActiveRecord::Migration[5.2]
       t.string :mensaje
       t.string :idUsuario
       t.boolean :leida
+      t.string :pqr
 
       t.timestamps
     end

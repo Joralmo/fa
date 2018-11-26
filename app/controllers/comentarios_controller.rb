@@ -36,12 +36,32 @@ class ComentariosController < ApplicationController
     Rails.logger.debug @comentario[:fecha]
     Rails.logger.debug "------------------------"
 
+    Rails.logger.debug "------------------------"
+    Rails.logger.debug usuario_actual.dependencium.descripcion
+    Rails.logger.debug "------------------------"
+
     @pqr = Pqr.find(comentario_params[:pqr_id])
-    if @pqr.update(dependencium: Dependencium.find(comentario_params[:depactual]))
-      Rails.logger.debug "------------------------"
-      Rails.logger.debug "Actualizado"
-      Rails.logger.debug @pqr.usuario.nombre
-      Rails.logger.debug "------------------------"
+    if usuario_actual.dependencium.descripcion == "Director"
+      if @pqr.update(dependencium: Dependencium.find(comentario_params[:depactual]), actual:"jefeDependencia")
+        Rails.logger.debug "------------------------"
+        Rails.logger.debug "Actualizado por Director"
+        Rails.logger.debug @pqr.usuario.nombre
+        Rails.logger.debug "------------------------"
+      end
+    elsif usuario_actual.rol.descripcion == "jefeDependencia"
+      if @pqr.update(dependencium: Dependencium.find(comentario_params[:depactual]), actual:"esclavoDependencia")
+        Rails.logger.debug "------------------------"
+        Rails.logger.debug "Actualizado por jefe"
+        Rails.logger.debug @pqr.usuario.nombre
+        Rails.logger.debug "------------------------"
+      end
+    elsif usuario_actual.rol.descripcion == "esclavoDependencia"
+      if @pqr.update(dependencium: Dependencium.find(comentario_params[:depactual]), acutal:"jefeDependencia")
+        Rails.logger.debug "------------------------"
+        Rails.logger.debug "Actualizado por esclavo"
+        Rails.logger.debug @pqr.usuario.nombre
+        Rails.logger.debug "------------------------"
+      end
     end
     
     respond_to do |format|

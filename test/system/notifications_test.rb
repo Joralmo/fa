@@ -17,6 +17,7 @@ class NotificationsTest < ApplicationSystemTestCase
     fill_in "Idusuario", with: @notification.idUsuario
     fill_in "Leida", with: @notification.leida
     fill_in "Mensaje", with: @notification.mensaje
+    fill_in "Pqr", with: @notification.pqr
     click_on "Create Notification"
 
     assert_text "Notification was successfully created"
@@ -30,6 +31,7 @@ class NotificationsTest < ApplicationSystemTestCase
     fill_in "Idusuario", with: @notification.idUsuario
     fill_in "Leida", with: @notification.leida
     fill_in "Mensaje", with: @notification.mensaje
+    fill_in "Pqr", with: @notification.pqr
     click_on "Update Notification"
 
     assert_text "Notification was successfully updated"

@@ -43,8 +43,8 @@
       <% end %>
 
       <br>
-
-      <% if usuario_actual.dependencium == @pqr.dependencium %>
+      
+      <% if usuario_actual.dependencium == @pqr.dependencium && @pqr.actual == usuario_actual.rol.descripcion %>
         <%= form_with(model: @pqr, local: true, multipart: true) do |form| %>
           <% if usuario_actual.dependencium.descripcion == "Director" %>
             <div class="input-field">

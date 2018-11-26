@@ -37,7 +37,7 @@
   <%end%>
 <% end %>
 
-<%if usuario_actual.rol.descripcion == "esclavoDependencia"%>
+<%if usuario_actual.rol.descripcion == "esclavoDependencia" && Pqr.find(params[:idPqr]).actual == "esclavoDependencia"%>
   <div class="input-field">
     <%= form.label :Transferir_a, {}, {:class => "arriba"} %>
     <%= form.select :dependencium_id, Usuario.where(dependencium:Dependencium.where(id:params[:idNuevaDependencia])).where.not(rol:Rol.where(descripcion:"esclavoDependencia")).collect{ |a| [ a.nombre, a.id] }, {}, {:class => 'browser-default'} %>
@@ -101,16 +101,16 @@
   let select = document.getElementById("comentario_dependencium_id");
   transferir.addEventListener("click", (e)=>{
 
-    
+    /*e.preventDefault();*/
     var http = new XMLHttpRequest();
     var url = "/nuevaNotificacion";
-    var parametros = `idUsuario=${select.value}&mensaje=${'<%= usuario_actual.nombre %>' + " Te ha transferido un pqr"}`;
+    var parametros = `idUsuario=${select.value}&mensaje=${'<%= usuario_actual.nombre %>' + " Te ha transferido un pqr"}&pqr=${'<%= params[:idPqr] %>'}`;
     http.open('POST', url, true);
     http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     http.setRequestHeader('X-CSRF-Token', '<%= form_authenticity_token %>')
     http.onreadystatechange = function() {
         if(http.readyState == 4 && http.status == 200) {
-            alert(http.responseText);
+            console.log(http.responseText);
         }
     }
 

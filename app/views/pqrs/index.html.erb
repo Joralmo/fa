@@ -43,6 +43,8 @@
           </tr>
         </thead>
 
+        <% @pqrs[0] %>
+
         <tbody>
           <% @pqrs.each do |pqr| %>
           <tr>
@@ -88,7 +90,11 @@
         </tbody>
       </table>
       <% else %>
-      No tiene Pqr's por atender
+        <% if usuario_actual.rol.descripcion == "usuario" %>
+        Aun no ha creado Pqr's
+        <%else%>
+        No tiene Pqr's por atender
+        <%end%>
       <% end %>
       <br>
       <% if usuario_actual.dependencium.descripcion == "usuarioNormal" %>

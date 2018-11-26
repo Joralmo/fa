@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_26_024406) do
+ActiveRecord::Schema.define(version: 2018_11_26_042416) do
 
   create_table "comentarios", force: :cascade do |t|
     t.datetime "fecha"
@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(version: 2018_11_26_024406) do
     t.string "mensaje"
     t.string "idUsuario"
     t.boolean "leida"
+    t.string "pqr"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -45,6 +46,7 @@ ActiveRecord::Schema.define(version: 2018_11_26_024406) do
     t.integer "usuario_id"
     t.integer "dependencium_id"
     t.string "respuesta"
+    t.string "actual"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["dependencium_id"], name: "index_pqrs_on_dependencium_id"
