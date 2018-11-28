@@ -89,6 +89,17 @@ class PqrsController < ApplicationController
     end
   end
 
+  def respuesta
+    Rails.logger.debug "============================"
+    Rails.logger.debug params[:idPqr]
+    Rails.logger.debug "============================"
+    @pqr = Pqr.find(params[:idPqr][1])
+    if @pqr.update(respuesta: params[:respuesta])
+      render :json => true
+    end
+    
+  end
+
   # DELETE /pqrs/1
   # DELETE /pqrs/1.json
   def destroy

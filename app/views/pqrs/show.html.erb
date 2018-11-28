@@ -43,31 +43,30 @@
       <% end %>
 
       <br>
-      
-      <% if usuario_actual.dependencium == @pqr.dependencium && @pqr.actual == usuario_actual.rol.descripcion %>
-        <%= form_with(model: @pqr, local: true, multipart: true) do |form| %>
-          <% if usuario_actual.dependencium.descripcion == "Director" %>
-            <div class="input-field">
-              <%= form.label :Transferir_a_dependencia, {}, {:class => "arriba"} %>
-              <%= form.select :dependencium_id, Dependencium.where("descripcion != ? AND descripcion != ?", "Director", "usuarioNormal").collect{ |a| [ a.descripcion, a.id] }, {}, {:class => 'browser-default', :id => "dependencia"} %>
-            </div>
+      <% if @pqr.respuesta == nil %>
+        <% if usuario_actual.dependencium == @pqr.dependencium && @pqr.actual == usuario_actual.rol.descripcion %>
+          <%= form_with(model: @pqr, local: true, multipart: true) do |form| %>
+            <% if usuario_actual.dependencium.descripcion == "Director" %>
+              <div class="input-field">
+                <%= form.label :Transferir_a_dependencia, {}, {:class => "arriba"} %>
+                <%= form.select :dependencium_id, Dependencium.where("descripcion != ? AND descripcion != ?", "Director", "usuarioNormal").collect{ |a| [ a.descripcion, a.id] }, {}, {:class => 'browser-default', :id => "dependencia"} %>
+              </div>
+              <%= link_to 'Responder'.html_safe, "#modal1", class:"waves-effect waves-light btn modal-trigger"%>
+            <%elsif usuario_actual.rol.descripcion == "esclavoDependencia" %>
+              <div class="input-field">
+                <%= form.label :Transferir_a_dependencia, {}, {:class => "arriba"} %>
+                <%= form.select :dependencium_id, Dependencium.where("descripcion = ?", usuario_actual.dependencium.descripcion).collect{ |a| [ a.descripcion, a.id] }, {}, {:class => 'browser-default', :id => "dependencia"} %>
+              </div>
+            <%else%>
+              <div class="input-field">
+                <%= form.label :Transferir_a_dependencia, {}, {:class => "arriba"} %>
+                <%= form.select :dependencium_id, Dependencium.where("descripcion = ? OR descripcion = ?", usuario_actual.dependencium.descripcion, "Director").collect{ |a| [ a.descripcion, a.id] }, {}, {:class => 'browser-default', :id => "dependencia"} %>
+              </div>
+            <%end%>
             <div class="btn waves-effect waves-light">
-              <%= form.submit "Resonder", {id:"responder"} %>
+              <%= form.submit "Transferir", {id:"transferir"} %>
             </div>
-          <%elsif usuario_actual.rol.descripcion == "esclavoDependencia" %>
-            <div class="input-field">
-              <%= form.label :Transferir_a_dependencia, {}, {:class => "arriba"} %>
-              <%= form.select :dependencium_id, Dependencium.where("descripcion = ?", usuario_actual.dependencium.descripcion).collect{ |a| [ a.descripcion, a.id] }, {}, {:class => 'browser-default', :id => "dependencia"} %>
-            </div>
-          <%else%>
-            <div class="input-field">
-              <%= form.label :Transferir_a_dependencia, {}, {:class => "arriba"} %>
-              <%= form.select :dependencium_id, Dependencium.where("descripcion = ? OR descripcion = ?", usuario_actual.dependencium.descripcion, "Director").collect{ |a| [ a.descripcion, a.id] }, {}, {:class => 'browser-default', :id => "dependencia"} %>
-            </div>
-          <%end%>
-          <div class="btn waves-effect waves-light">
-            <%= form.submit "Transferir", {id:"transferir"} %>
-          </div>
+          <% end %>
         <% end %>
       <% end %>
 
@@ -117,6 +116,36 @@
     <div class="col s3"></div>
   </div>
 </div>
+
+<!-- Modal Trigger -->
+  <!-- Modal Structure -->
+  <div id="modal1" class="modal">
+    <div class="modal-content">
+      <h4>Responder Pqr</h4>
+      <textarea id="respuesta" class="materialize-textarea"></textarea>
+      <label for="respuesta">Respuesta</label>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-close waves-effect waves-green btn-flat">Cancelar</a>
+      <a href="#!" id="responder" class="modal-close waves-effect waves-green btn-flat">Responder</a>
+    </div>
+  </div>
+
 <%= javascript_tag do %>
-  console.log("Hola");
+  let btnResponder = document.getElementById("responder");
+  let resEnviar = document.getElementById("respuesta");
+  btnResponder.addEventListener("click", (e)=>{
+    var http = new XMLHttpRequest();
+    var url = "/respuesta";
+    var parametros = `respuesta=${resEnviar.value}&idPqr='<%= @pqr.id %>'`;
+    http.open('POST', url, true);
+    http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    http.setRequestHeader('X-CSRF-Token', '<%= form_authenticity_token %>')
+    http.onreadystatechange = function() {
+        if(http.readyState == 4 && http.status == 200) {
+            console.log(http.responseText);
+        }
+    }
+    http.send(parametros);
+  });
 <% end %>
