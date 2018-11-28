@@ -51,6 +51,9 @@
               <%= form.label :Transferir_a_dependencia, {}, {:class => "arriba"} %>
               <%= form.select :dependencium_id, Dependencium.where("descripcion != ? AND descripcion != ?", "Director", "usuarioNormal").collect{ |a| [ a.descripcion, a.id] }, {}, {:class => 'browser-default', :id => "dependencia"} %>
             </div>
+            <div class="btn waves-effect waves-light">
+              <%= form.submit "Resonder", {id:"responder"} %>
+            </div>
           <%elsif usuario_actual.rol.descripcion == "esclavoDependencia" %>
             <div class="input-field">
               <%= form.label :Transferir_a_dependencia, {}, {:class => "arriba"} %>
@@ -114,3 +117,6 @@
     <div class="col s3"></div>
   </div>
 </div>
+<%= javascript_tag do %>
+  console.log("Hola");
+<% end %>

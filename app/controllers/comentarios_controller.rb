@@ -44,19 +44,25 @@ class ComentariosController < ApplicationController
     if usuario_actual.dependencium.descripcion == "Director"
       if @pqr.update(dependencium: Dependencium.find(comentario_params[:depactual]), actual:"jefeDependencia")
         Rails.logger.debug "------------------------"
-        Rails.logger.debug "Actualizado por Director"
+        Rails.logger.debug "Actualizado p
+        or Director"
         Rails.logger.debug @pqr.usuario.nombre
         Rails.logger.debug "------------------------"
       end
     elsif usuario_actual.rol.descripcion == "jefeDependencia"
-      if @pqr.update(dependencium: Dependencium.find(comentario_params[:depactual]), actual:"esclavoDependencia")
+      if @pqr.update(dependencium: Dependencium.find(comentario_params[:depactual]))
+        if Dependencium.find(comentario_params[:depactual]).descripcion == "Director"
+          @pqr.update(actual: "s_admin")
+        else
+          @pqr.update(actual: "esclavoDependencia")
+        end
         Rails.logger.debug "------------------------"
         Rails.logger.debug "Actualizado por jefe"
         Rails.logger.debug @pqr.usuario.nombre
         Rails.logger.debug "------------------------"
       end
     elsif usuario_actual.rol.descripcion == "esclavoDependencia"
-      if @pqr.update(dependencium: Dependencium.find(comentario_params[:depactual]), acutal:"jefeDependencia")
+      if @pqr.update(dependencium: Dependencium.find(comentario_params[:depactual]), actual:"jefeDependencia")
         Rails.logger.debug "------------------------"
         Rails.logger.debug "Actualizado por esclavo"
         Rails.logger.debug @pqr.usuario.nombre
