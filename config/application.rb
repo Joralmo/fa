@@ -20,3 +20,4 @@ module FinalArquitectura
 end
 config.assets.initialize_on_precompile = false
 config.assets.version = '1.0'
+RAILS_ENV=production bundle exec rake assets:precompile
