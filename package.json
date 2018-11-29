@@ -1,5 +1,7 @@
 {
   "name": "finalArquitectura",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "yarn": "^1.12.3"
+  }
 }
