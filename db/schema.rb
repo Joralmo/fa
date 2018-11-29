@@ -10,10 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_29_043333) do
+ActiveRecord::Schema.define(version: 2018_11_29_055616) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "auditoria", force: :cascade do |t|
+    t.string "mensaje"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "comentarios", force: :cascade do |t|
     t.datetime "fecha"

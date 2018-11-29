@@ -35,7 +35,6 @@
         <% if usuario_actual.dependencium.descripcion == "usuarioNormal" %>
         <p><%= link_to '<i class="material-icons left">add_circle_outline</i>Presentar PQR'.html_safe, new_pqr_path, class:"waves-effect waves-light btn" %>
         <% end %>
-        <p><a class="waves-effect waves-light btn"><i class="material-icons left">search</i>Consultar PQR</a>
         <p><%= link_to '<i class="material-icons left">remove_red_eye</i>Ver mis PQR'.html_safe, pqrs_path, class:"waves-effect waves-light btn" %>
     <% else %>
         <p><h4>Para poder presentar o consultar PQR debe</h4></p>
@@ -58,6 +57,6 @@
 
 <%= javascript_tag do %>
     '<% if usuario_actual && Notification.count != 0 %>'
-        numeroDeNotificaciones.innerHTML = '<%=Notification.where(idusuario:usuario_actual.id).length%>';
+        numeroDeNotificaciones.innerHTML = '<%=Notification.where(idUsuario:usuario_actual.id).where(leida:false).length%>';
     '<%end%>'
 <% end %>

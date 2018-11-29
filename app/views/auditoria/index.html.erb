@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="row">
+    <div class="col s2"></div>
+    <p id="notice"><%= notice %></p>
+
+<h1>Auditoria</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Mensaje</th>
+      <th>Fecha</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @auditoria.each do |auditorium| %>
+      <tr>
+        <td><%= auditorium.mensaje %></td>
+        <td><%= auditorium.created_at.strftime("%d de %B del %Y a las %H:%M") %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+    <div class="col s6">
+    </div>
+    <div class="col s3"></div>
+  </div>
+</div>

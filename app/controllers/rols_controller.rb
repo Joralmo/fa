@@ -24,7 +24,10 @@ class RolsController < ApplicationController
   # POST /rols
   # POST /rols.json
   def create
-    @rol = Rol.new(rol_params)
+    if usuario_actual
+      Auditorium.create(mensaje:usuario_actual.nombre+" con id "+usuario_actual.id.to_s+" creó un nuevo rol")
+    end
+      @rol = Rol.new(rol_params)
 
     respond_to do |format|
       if @rol.save
@@ -40,6 +43,9 @@ class RolsController < ApplicationController
   # PATCH/PUT /rols/1
   # PATCH/PUT /rols/1.json
   def update
+    if usuario_actual
+      Auditorium.create(mensaje:usuario_actual.nombre+" con id "+usuario_actual.id.to_s+" actualizó un rol")
+    end
     respond_to do |format|
       if @rol.update(rol_params)
         format.html { redirect_to @rol, notice: 'Rol was successfully updated.' }
@@ -54,7 +60,10 @@ class RolsController < ApplicationController
   # DELETE /rols/1
   # DELETE /rols/1.json
   def destroy
-    @rol.destroy
+    if usuario_actual
+      Auditorium.create(mensaje:usuario_actual.nombre+" con id "+usuario_actual.id.to_s+" eliminó un rol")
+    end
+      @rol.destroy
     respond_to do |format|
       format.html { redirect_to rols_url, notice: 'Rol was successfully destroyed.' }
       format.json { head :no_content }

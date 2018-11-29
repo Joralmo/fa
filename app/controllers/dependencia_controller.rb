@@ -24,7 +24,11 @@ class DependenciaController < ApplicationController
   # POST /dependencia
   # POST /dependencia.json
   def create
-    @dependencium = Dependencium.new(dependencium_params)
+
+    if usuario_actual
+      Auditorium.create(mensaje:usuario_actual.nombre+" con id "+usuario_actual.id.to_s+" creó una nueva dependencia")
+    end
+      @dependencium = Dependencium.new(dependencium_params)
 
     respond_to do |format|
       if @dependencium.save
@@ -40,7 +44,11 @@ class DependenciaController < ApplicationController
   # PATCH/PUT /dependencia/1
   # PATCH/PUT /dependencia/1.json
   def update
-    respond_to do |format|
+
+    if usuario_actual
+      Auditorium.create(mensaje:usuario_actual.nombre+" con id "+usuario_actual.id.to_s+" actualizo una dependencia")
+    end
+      respond_to do |format|
       if @dependencium.update(dependencium_params)
         format.html { redirect_to @dependencium, notice: 'Dependencium was successfully updated.' }
         format.json { render :show, status: :ok, location: @dependencium }
@@ -54,7 +62,11 @@ class DependenciaController < ApplicationController
   # DELETE /dependencia/1
   # DELETE /dependencia/1.json
   def destroy
-    @dependencium.destroy
+
+    if usuario_actual
+      Auditorium.create(mensaje:usuario_actual.nombre+" con id "+usuario_actual.id.to_s+" eliminó una dependencia")
+    end
+      @dependencium.destroy
     respond_to do |format|
       format.html { redirect_to dependencia_url, notice: 'Dependencium was successfully destroyed.' }
       format.json { head :no_content }

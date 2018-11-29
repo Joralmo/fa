@@ -4,7 +4,7 @@ class NotificationsController < ApplicationController
   # GET /notifications
   # GET /notifications.json
   def index
-    @notifications = Notification.where(idusuario:usuario_actual.id)
+    @notifications = Notification.where(idUsuario:usuario_actual.id).where(leida:false)
   end
 
   # GET /notifications/1
@@ -28,7 +28,7 @@ class NotificationsController < ApplicationController
 
     respond_to do |format|
       if @notification.save
-        format.html { redirect_to @notification, notice: 'Notification was successfully created.' }
+        format.html { redirect_to @notification, notice: 'Se ha marcado  como leída.' }
         format.json { render :show, status: :created, location: @notification }
       else
         format.html { render :new }
@@ -50,8 +50,8 @@ class NotificationsController < ApplicationController
   # PATCH/PUT /notifications/1.json
   def update
     respond_to do |format|
-      if @notification.update(notification_params)
-        format.html { redirect_to @notification, notice: 'Notification was successfully updated.' }
+      if @notification.update(leida:true)
+        format.html { redirect_to @notification, notice: 'Se ha marcado  como leída.' }
         format.json { render :show, status: :ok, location: @notification }
       else
         format.html { render :edit }
@@ -63,10 +63,14 @@ class NotificationsController < ApplicationController
   # DELETE /notifications/1
   # DELETE /notifications/1.json
   def destroy
-    @notification.destroy
     respond_to do |format|
-      format.html { redirect_to notifications_url, notice: 'Notification was successfully destroyed.' }
-      format.json { head :no_content }
+      if @notification.update(leida:true)
+        format.html { redirect_to @notification, notice: 'Se ha marcado  como leída.' }
+        format.json { render :show, status: :ok, location: @notification }
+      else
+        format.html { render :edit }
+        format.json { render json: @notification.errors, status: :unprocessable_entity }
+      end
     end
   end
 

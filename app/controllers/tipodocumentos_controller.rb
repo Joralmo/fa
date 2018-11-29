@@ -24,6 +24,9 @@ class TipodocumentosController < ApplicationController
   # POST /tipodocumentos
   # POST /tipodocumentos.json
   def create
+    if usuario_actual
+      Auditorium.create(mensaje:usuario_actual.nombre+" con id "+usuario_actual.id.to_s+" creó un nuevo tipo de documento")
+    end
     @tipodocumento = Tipodocumento.new(tipodocumento_params)
 
     respond_to do |format|
@@ -40,6 +43,9 @@ class TipodocumentosController < ApplicationController
   # PATCH/PUT /tipodocumentos/1
   # PATCH/PUT /tipodocumentos/1.json
   def update
+    if usuario_actual
+      Auditorium.create(mensaje:usuario_actual.nombre+" con id "+usuario_actual.id.to_s+" actualizó un tipo de documento")
+    end
     respond_to do |format|
       if @tipodocumento.update(tipodocumento_params)
         format.html { redirect_to @tipodocumento, notice: 'Tipodocumento was successfully updated.' }
@@ -54,6 +60,9 @@ class TipodocumentosController < ApplicationController
   # DELETE /tipodocumentos/1
   # DELETE /tipodocumentos/1.json
   def destroy
+    if usuario_actual
+      Auditorium.create(mensaje:usuario_actual.nombre+" con id "+usuario_actual.id.to_s+" eliminó un tipo de documento")
+    end
     @tipodocumento.destroy
     respond_to do |format|
       format.html { redirect_to tipodocumentos_url, notice: 'Tipodocumento was successfully destroyed.' }

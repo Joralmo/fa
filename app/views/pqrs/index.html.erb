@@ -37,7 +37,7 @@
             <th>Archivo</th>
             <th>Estado</th>
             <th>Usuario</th>
-            <th>Dependencium</th>
+            <th>Dependencia</th>
             <th>Respuesta</th>
             <th colspan="3"></th>
           </tr>
@@ -79,12 +79,14 @@
             <td>
               <%= link_to '<i class="tiny material-icons">visibility</i>'.html_safe, pqr %>
             </td>
+            <% if usuario_actual.rol.descripcion != "usuario" %>
             <td>
               <%= link_to '<i class="tiny material-icons">mode_edit</i>'.html_safe, edit_pqr_path(pqr) %>
             </td>
             <td>
               <%= link_to '<i class="tiny material-icons">delete</i>'.html_safe, pqr, method: :delete, data: { confirm: '¿Desea eliminar esté pqr?' } %>
             </td>
+            <%end%>
           </tr>
           <% end %>
         </tbody>

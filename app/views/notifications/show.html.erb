@@ -1,3 +1,7 @@
+<div class="container">
+  <div class="row">
+    <div class="col s2"></div>
+    <div class="col s6">
 <p id="notice"><%= notice %></p>
 
 <p>
@@ -5,20 +9,11 @@
   <%= @notification.mensaje %>
 </p>
 
-<p>
-  <strong>Idusuario:</strong>
-  <%= @notification.idUsuario %>
-</p>
+<%= link_to 'Inicio', "/" %> |
+<%= link_to 'Volver', notifications_path %>
 
-<p>
-  <strong>Leida:</strong>
-  <%= @notification.leida %>
-</p>
-
-<p>
-  <strong>Pqr:</strong>
-  <%= @notification.pqr %>
-</p>
-
-<%= link_to 'Edit', edit_notification_path(@notification) %> |
-<%= link_to 'Back', notifications_path %>
+    <div class="col s6">
+    </div>
+    <div class="col s3"></div>
+  </div>
+</div>

@@ -27,6 +27,9 @@ class ComentariosController < ApplicationController
   # POST /comentarios
   # POST /comentarios.json
   def create
+    if usuario_actual
+      Auditorium.create(mensaje:usuario_actual.nombre+" con id "+usuario_actual.id.to_s+" creo un nuevo comentario")
+    end
     @comentario = Comentario.new(comentario_params)
     @comentario.fecha = Time.now
 
@@ -84,6 +87,9 @@ class ComentariosController < ApplicationController
   # PATCH/PUT /comentarios/1
   # PATCH/PUT /comentarios/1.json
   def update
+    if usuario_actual
+      Auditorium.create(mensaje:usuario_actual.nombre+" con id "+usuario_actual.id.to_s+" actualizo un comentario")
+    end
     respond_to do |format|
       if @comentario.update(comentario_params)
         format.html { redirect_to @comentario, notice: 'Comentario was successfully updated.' }
@@ -98,7 +104,10 @@ class ComentariosController < ApplicationController
   # DELETE /comentarios/1
   # DELETE /comentarios/1.json
   def destroy
-    @comentario.destroy
+    if usuario_actual
+      Auditorium.create(mensaje:usuario_actual.nombre+" con id "+usuario_actual.id.to_s+" eliminó un comentario")
+    end
+      @comentario.destroy
     respond_to do |format|
       format.html { redirect_to comentarios_url, notice: 'Comentario was successfully destroyed.' }
       format.json { head :no_content }

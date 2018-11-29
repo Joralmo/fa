@@ -30,6 +30,9 @@ class UsuariosController < ApplicationController
   # POST /usuarios
   # POST /usuarios.json
   def create
+    if usuario_actual
+      Auditorium.create(mensaje:usuario_actual.nombre+" con id "+usuario_actual.id.to_s+" creó un nuevo usuario")
+    end
     @usuario = Usuario.new
     @usuario = Usuario.new(usuario_params)
 
@@ -52,6 +55,9 @@ class UsuariosController < ApplicationController
   # PATCH/PUT /usuarios/1
   # PATCH/PUT /usuarios/1.json
   def update
+    if usuario_actual
+      Auditorium.create(mensaje:usuario_actual.nombre+" con id "+usuario_actual.id.to_s+" actualizó un usuario")
+    end
     respond_to do |format|
       if @usuario.update(usuario_params)
         format.html { redirect_to @usuario, notice: 'Usuario was successfully updated.' }
@@ -66,6 +72,9 @@ class UsuariosController < ApplicationController
   # DELETE /usuarios/1
   # DELETE /usuarios/1.json
   def destroy
+    if usuario_actual
+      Auditorium.create(mensaje:usuario_actual.nombre+" con id "+usuario_actual.id.to_s+" eliminó un usuario")
+    end
     @usuario.destroy
     respond_to do |format|
       format.html { redirect_to usuarios_url, notice: 'Usuario was successfully destroyed.' }

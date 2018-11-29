@@ -38,7 +38,9 @@ class PqrsController < ApplicationController
   # POST /pqrs
   # POST /pqrs.json
   def create
-
+    if usuario_actual
+      Auditorium.create(mensaje:usuario_actual.nombre+" con id "+usuario_actual.id.to_s+" creó un nuevo pqr")
+    end
     @pqr = Pqr.new(pqr_params)
 
     @pqr.estado = false
@@ -54,7 +56,7 @@ class PqrsController < ApplicationController
     respond_to do |format|
       if @pqr.save
        
-        format.html { redirect_to @pqr, notice: 'Pqr was successfully created.' }
+        format.html { redirect_to @pqr, notice: 'Pqr enviado correctamente.' }
         format.json { render :show, status: :created, location: @pqr }
       else
         format.html { render :new }
@@ -67,7 +69,10 @@ class PqrsController < ApplicationController
   # PATCH/PUT /pqrs/1
   # PATCH/PUT /pqrs/1.json
   def update
-    if params.require(:commit) == "Transferir"
+    if usuario_actual
+      Auditorium.create(mensaje:usuario_actual.nombre+" con id "+usuario_actual.id.to_s+" actualizó un pqr")
+    end
+     if params.require(:commit) == "Transferir"
       datos = {
         idPqr: params[:id],
         idNuevaDependencia: pqr_params[:dependencium_id]
@@ -90,9 +95,13 @@ class PqrsController < ApplicationController
   end
 
   def respuesta
+    if usuario_actual
+      Auditorium.create(mensaje:usuario_actual.nombre+" con id "+usuario_actual.id.to_s+" respondió un pqr")
+    end
     Rails.logger.debug "============================"
     Rails.logger.debug params[:idPqr]
     Rails.logger.debug "============================"
+    Notification.create(idUsuario:Pqr.find(params[:idPqr][1]).usuario.id, mensaje:"Se le ha dado respuesta a uno de sus pqr", leida:false, pqr:params[:idPqr][1])
     @pqr = Pqr.find(params[:idPqr][1])
     if @pqr.update(respuesta: params[:respuesta])
       render :json => true
@@ -103,6 +112,9 @@ class PqrsController < ApplicationController
   # DELETE /pqrs/1
   # DELETE /pqrs/1.json
   def destroy
+    if usuario_actual
+      Auditorium.create(mensaje:usuario_actual.nombre+" con id "+usuario_actual.id.to_s+" eliminó un pqr")
+    end
     @pqr.destroy
     respond_to do |format|
       format.html { redirect_to pqrs_url, notice: 'Pqr was successfully destroyed.' }

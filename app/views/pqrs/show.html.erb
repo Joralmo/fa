@@ -23,16 +23,22 @@
 
       <p>
         <strong>Estado:</strong>
-        <%= @pqr.estado %>
+        <% if @pqr.estado %>
+        <p>Respondido</p>
+        <%else%>
+        <p>Esperando respuesta</p>
+        <%end%>
       </p>
 
+      <% if false %>
       <p>
         <strong>Usuario:</strong>
         <%= @pqr.usuario.nombre %>
       </p>
+      <%end%>
 
       <p>
-        <strong>Dependencium:</strong>
+        <strong>Actual encargado:</strong>
         <%= @pqr.dependencium.descripcion %>
       </p>
       <% if @pqr.respuesta != nil %>
@@ -144,6 +150,7 @@
     http.onreadystatechange = function() {
         if(http.readyState == 4 && http.status == 200) {
             console.log(http.responseText);
+            location.reload();
         }
     }
     http.send(parametros);
