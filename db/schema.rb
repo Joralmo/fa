@@ -10,14 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_26_042416) do
+ActiveRecord::Schema.define(version: 2018_11_29_043333) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "comentarios", force: :cascade do |t|
     t.datetime "fecha"
     t.string "comentario"
     t.string "depactual"
     t.string "depanterior"
-    t.integer "pqr_id"
+    t.bigint "pqr_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["pqr_id"], name: "index_comentarios_on_pqr_id"
@@ -43,8 +46,8 @@ ActiveRecord::Schema.define(version: 2018_11_26_042416) do
     t.string "descripcion"
     t.string "archivo"
     t.boolean "estado"
-    t.integer "usuario_id"
-    t.integer "dependencium_id"
+    t.bigint "usuario_id"
+    t.bigint "dependencium_id"
     t.string "respuesta"
     t.string "actual"
     t.datetime "created_at", null: false
@@ -69,10 +72,10 @@ ActiveRecord::Schema.define(version: 2018_11_26_042416) do
     t.string "nombre"
     t.string "apellido"
     t.string "celular"
-    t.integer "rol_id"
-    t.integer "dependencium_id"
+    t.bigint "rol_id"
+    t.bigint "dependencium_id"
     t.string "email"
-    t.integer "tipodocumento_id"
+    t.bigint "tipodocumento_id"
     t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -82,4 +85,10 @@ ActiveRecord::Schema.define(version: 2018_11_26_042416) do
     t.index ["tipodocumento_id"], name: "index_usuarios_on_tipodocumento_id"
   end
 
+  add_foreign_key "comentarios", "pqrs"
+  add_foreign_key "pqrs", "dependencia"
+  add_foreign_key "pqrs", "usuarios"
+  add_foreign_key "usuarios", "dependencia"
+  add_foreign_key "usuarios", "rols"
+  add_foreign_key "usuarios", "tipodocumentos"
 end

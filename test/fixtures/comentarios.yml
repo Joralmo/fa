@@ -1,14 +1,14 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  fecha: 2018-11-03 19:15:08
+  fecha: 2018-11-28 23:33:33
   comentario: MyString
   depactual: MyString
   depanterior: MyString
   pqr: one
 
 two:
-  fecha: 2018-11-03 19:15:08
+  fecha: 2018-11-28 23:33:33
   comentario: MyString
   depactual: MyString
   depanterior: MyString

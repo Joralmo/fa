@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
+  resources :comentarios
   resources :notifications
   resources :pqrs
   root 'inicio#index'
-  resources :comentarios
   resources :usuarios
   resources :sessions, only: [:new, :create, :destroy]
   resources :dependencia
