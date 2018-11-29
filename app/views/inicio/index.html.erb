@@ -57,7 +57,7 @@
 
 
 <%= javascript_tag do %>
-    '<% if usuario_actual %>'
+    '<% if usuario_actual && Notification.count != 0 %>'
         numeroDeNotificaciones.innerHTML = '<%=Notification.where(idusuario:usuario_actual.id).length%>';
     '<%end%>'
 <% end %>
